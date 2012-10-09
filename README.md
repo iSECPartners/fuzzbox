@@ -1,19 +1,20 @@
 fuzzbox
 =======
 Fuzzbox 0.3
-(C)2007 Information Security Partners Inc.
 
 A multi-codec media fuzzing tool.
 
-_Note: This tool is provided for historical reference, and is not being 
-actively maintained. Feel free to fork and/or provide pull requests, though._
+https://www.isecpartners.com/storage/docs/presentations/iSEC-Thiel-Exposing-Vulnerabilities-Media-Software-Presentation.pdf
 
-Fuzzbox creates corrupt but structurally valid sound files, and
-optionally launches them off in a player, gathering backtraces and
+_Note: This tool is provided for historical reference, and is not being 
+actively maintained. Feel free to fork and/or provide pull requests._
+
+Fuzzbox creates corrupt but structurally valid sound files and
+optionally launches them in a player, gathering backtraces and
 register information. Also included is a standalone tool to reset
 the CRCs of Ogg-contained files after manual corruption.
 
-NOTICE: One of the fuzzing tests tries to insert an HTTP URL to check
+__NOTICE:__ One of the fuzzing tests tries to insert an HTTP URL to check
 for programs attempting to make web requests when processing files.
 This goes to labs.isecpartners.com by default. Please change this
 if you have privacy concerns.

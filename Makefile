@@ -1,5 +1,5 @@
 FETCH_CMD=	fetch
-PY_LIB=		/usr/local/lib/python2.5
+PY_LIB=		/usr/local/lib/python2.7
 MUTAGEN_SITE=	http://www.sacredchao.net/~piman/software/
 MUTAGEN_DIST=	mutagen-1.11
 
