@@ -1,6 +1,6 @@
 fuzzbox
 =======
-Fuzzbox 0.3
+Fuzzbox 0.3.1
 
 A multi-codec media fuzzing tool.
 
