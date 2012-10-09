@@ -1,0 +1,22 @@
+--- _vorbis.py	Wed May 30 19:37:13 2007
++++ /crypt/usr/local/lib/python2.4/site-packages/mutagen/_vorbis.py	Tue Jun  5 11:17:43 2007
+@@ -140,14 +140,17 @@
+         framing -- if true, append a framing bit (see load)
+         """
+ 
+-        self.validate()
++        #self.validate()
+ 
+         f = StringIO()
+         f.write(cdata.to_uint_le(len(self.vendor.encode('utf-8'))))
+         f.write(self.vendor.encode('utf-8'))
+         f.write(cdata.to_uint_le(len(self)))
+         for tag, value in self:
+-            comment = "%s=%s" % (tag, value.encode('utf-8'))
++	    try:
++		comment = "%s=%s" % (tag, value.encode('utf-8'))
++	    except: 
++		comment = "%s=%s" % (value, tag)
+             f.write(cdata.to_uint_le(len(comment)))
+             f.write(comment)
+         if framing: f.write("\x01")

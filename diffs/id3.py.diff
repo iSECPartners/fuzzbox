@@ -1,0 +1,94 @@
+--- id3.py	Sun Jan 21 21:19:43 2007
++++ /usr/local/lib/python2.4/site-packages/mutagen/id3.py	Tue Jan 23 15:53:42 2007
+@@ -397,9 +397,9 @@
+             if len(str(frame)) == 0: return ''
+         framedata = frame._writeData()
+         usize = len(framedata)
+-        if usize > 2048:
+-            framedata = BitPaddedInt.to_str(usize) + framedata.encode('zlib')
+-            flags |= Frame.FLAG24_COMPRESS | Frame.FLAG24_DATALEN
++        #if usize > 2048:
++        #    framedata = BitPaddedInt.to_str(usize) + framedata.encode('zlib')
++        #    flags |= Frame.FLAG24_COMPRESS | Frame.FLAG24_DATALEN
+         datasize = BitPaddedInt.to_str(len(framedata), width=4)
+         header = pack('>4s4sH', type(frame).__name__, datasize, flags)
+         return header + framedata
+@@ -629,8 +629,11 @@
+     # Okay, seriously. This is private and defined explicitly and
+     # completely by the ID3 specification. You can't just add
+     # encodings here however you want.
++    #
++    # Oh yes I can.
+     _encodings = ( ('latin1', '\x00'), ('utf16', '\x00\x00'),
+-                   ('utf_16_be', '\x00\x00'), ('utf8', '\x00') )
++                   ('utf_16_be', '\x00\x00'), ('utf8', '\x00'),
++		   ('ascii', '\x00') )
+ 
+     def read(self, frame, data):
+         enc, term = self._encodings[frame.encoding]
+@@ -652,7 +655,12 @@
+ 
+     def write(self, frame, value):
+         enc, term = self._encodings[frame.encoding]
+-        return value.encode(enc) + term
++        #return value.encode(enc) + term
++	try:
++	    moo = value.encode(enc) + term
++	except:
++	    moo = value
++        return moo
+ 
+     def validate(self, frame, value): return unicode(value)
+ 
+@@ -1163,7 +1171,7 @@
+     HashKey = property(lambda s: '%s:%s' % (s.FrameID, s.url))
+ 
+ class TALB(TextFrame): "Album"
+-class TBPM(NumericTextFrame): "Beats per minute"
++class TBPM(TextFrame): "Beats per minute"
+ class TCOM(TextFrame): "Composer"
+ 
+ class TCON(TextFrame):
+@@ -1227,7 +1235,7 @@
+ class TDAT(TextFrame): "Date of recording (DDMM)"
+ class TDEN(TimeStampTextFrame): "Encoding Time"
+ class TDOR(TimeStampTextFrame): "Original Release Time"
+-class TDLY(NumericTextFrame): "Audio Delay (ms)"
++class TDLY(TextFrame): "Audio Delay (ms)"
+ class TDRC(TimeStampTextFrame): "Recording Time"
+ class TDRL(TimeStampTextFrame): "Release Time"
+ class TDTG(TimeStampTextFrame): "Tagging Time"
+@@ -1240,14 +1248,14 @@
+ class TIT3(TextFrame): "Subtitle/Description refinement"
+ class TKEY(TextFrame): "Starting Key"
+ class TLAN(TextFrame): "Audio Languages"
+-class TLEN(NumericTextFrame): "Audio Length (ms)"
++class TLEN(TextFrame): "Audio Length (ms)"
+ class TMED(TextFrame): "Source Media Type"
+ class TMOO(TextFrame): "Mood"
+ class TOAL(TextFrame): "Original Album"
+ class TOFN(TextFrame): "Original Filename"
+ class TOLY(TextFrame): "Original Lyricist"
+ class TOPE(TextFrame): "Original Artist/Performer"
+-class TORY(NumericTextFrame): "Original Release Year"
++class TORY(TextFrame): "Original Release Year"
+ class TOWN(TextFrame): "Owner/Licensee"
+ class TPE1(TextFrame): "Lead Artist/Performer/Soloist/Group"
+ class TPE2(TextFrame): "Band/Orchestra/Accompaniment"
+@@ -1260,14 +1268,14 @@
+ class TRDA(TextFrame): "Recording Dates"
+ class TRSN(TextFrame): "Internet Radio Station Name"
+ class TRSO(TextFrame): "Internet Radio Station Owner"
+-class TSIZ(NumericTextFrame): "Size of audio data (bytes)"
++class TSIZ(TextFrame): "Size of audio data (bytes)"
+ class TSOA(TextFrame): "Album Sort Order key"
+ class TSOP(TextFrame): "Perfomer Sort Order key"
+ class TSOT(TextFrame): "Title Sort Order key"
+ class TSRC(TextFrame): "International Standard Recording Code (ISRC)"
+ class TSSE(TextFrame): "Encoder settings"
+ class TSST(TextFrame): "Set Subtitle"
+-class TYER(NumericTextFrame): "Year of recording"
++class TYER(TextFrame): "Year of recording"
+ 
+ class TXXX(TextFrame):
+     """User-defined text data.

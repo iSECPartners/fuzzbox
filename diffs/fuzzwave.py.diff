@@ -1,0 +1,51 @@
+--- /usr/local/lib/python2.4/wave.py	Tue Jul 18 13:25:15 2006
++++ /usr/local/lib/python2.4/fuzzwave.py	Mon Aug 21 17:47:55 2006
+@@ -319,8 +319,6 @@
+     def setnchannels(self, nchannels):
+         if self._datawritten:
+             raise Error, 'cannot change parameters after starting to write'
+-        if nchannels < 1:
+-            raise Error, 'bad # of channels'
+         self._nchannels = nchannels
+ 
+     def getnchannels(self):
+@@ -331,8 +329,6 @@
+     def setsampwidth(self, sampwidth):
+         if self._datawritten:
+             raise Error, 'cannot change parameters after starting to write'
+-        if sampwidth < 1 or sampwidth > 4:
+-            raise Error, 'bad sample width'
+         self._sampwidth = sampwidth
+ 
+     def getsampwidth(self):
+@@ -343,8 +339,6 @@
+     def setframerate(self, framerate):
+         if self._datawritten:
+             raise Error, 'cannot change parameters after starting to write'
+-        if framerate <= 0:
+-            raise Error, 'bad frame rate'
+         self._framerate = framerate
+ 
+     def getframerate(self):
+@@ -363,8 +357,6 @@
+     def setcomptype(self, comptype, compname):
+         if self._datawritten:
+             raise Error, 'cannot change parameters after starting to write'
+-        if comptype not in ('NONE',):
+-            raise Error, 'unsupported compression type'
+         self._comptype = comptype
+         self._compname = compname
+ 
+@@ -439,12 +431,6 @@
+ 
+     def _ensure_header_written(self, datasize):
+         if not self._datawritten:
+-            if not self._nchannels:
+-                raise Error, '# channels not specified'
+-            if not self._sampwidth:
+-                raise Error, 'sample width not specified'
+-            if not self._framerate:
+-                raise Error, 'sampling rate not specified'
+             self._write_header(datasize)
+ 
+     def _write_header(self, initlength):

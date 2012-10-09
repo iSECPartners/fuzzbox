@@ -1,0 +1,11 @@
+--- mutagen-1.11/mutagen/mp4.py	2007-04-26 19:12:50.000000000 -0700
++++ mutagen/mp4.py	2007-07-24 22:48:52.000000000 -0700
+@@ -265,7 +265,7 @@
+         """Save the metadata to the given filename."""
+         values = []
+         items = self.items()
+-        items.sort(self.__key_sort)
++        #items.sort(self.__key_sort)
+         for key, value in items:
+             info = self.__atoms.get(key[:4], (None, MP4Tags.__render_text))
+             try:

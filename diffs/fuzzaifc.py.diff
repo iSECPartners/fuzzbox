@@ -1,0 +1,70 @@
+--- aifc.py	Wed Feb 14 10:45:39 2007
++++ fuzzaifc.py	Mon Mar  5 15:04:27 2007
+@@ -494,7 +494,8 @@
+                     scheme = cl.G711_ALAW
+                     self._framesize = self._framesize / 2
+                 else:
+-                    raise Error, 'unsupported compression type'
++                    #raise Error, 'unsupported compression type'
++		    pass
+                 self._decomp = cl.OpenDecompressor(scheme)
+                 self._convert = self._decomp_data
+         else:
+@@ -604,7 +605,8 @@
+         if self._nframeswritten:
+             raise Error, 'cannot change parameters after starting to write'
+         if nchannels < 1:
+-            raise Error, 'bad # of channels'
++            #raise Error, 'bad # of channels'
++	    pass
+         self._nchannels = nchannels
+ 
+     def getnchannels(self):
+@@ -616,7 +618,8 @@
+         if self._nframeswritten:
+             raise Error, 'cannot change parameters after starting to write'
+         if sampwidth < 1 or sampwidth > 4:
+-            raise Error, 'bad sample width'
++            #raise Error, 'bad sample width'
++	    pass
+         self._sampwidth = sampwidth
+ 
+     def getsampwidth(self):
+@@ -628,7 +631,8 @@
+         if self._nframeswritten:
+             raise Error, 'cannot change parameters after starting to write'
+         if framerate <= 0:
+-            raise Error, 'bad frame rate'
++            #raise Error, 'bad frame rate'
++	    pass
+         self._framerate = framerate
+ 
+     def getframerate(self):
+@@ -648,7 +652,8 @@
+         if self._nframeswritten:
+             raise Error, 'cannot change parameters after starting to write'
+         if comptype not in ('NONE', 'ULAW', 'ALAW', 'G722'):
+-            raise Error, 'unsupported compression type'
++            #raise Error, 'unsupported compression type'
++	    pass
+         self._comptype = comptype
+         self._compname = compname
+ 
+@@ -774,11 +779,14 @@
+                 if self._sampwidth != 2:
+                     raise Error, 'sample width must be 2 when compressing with G7.22 (ADPCM)'
+             if not self._nchannels:
+-                raise Error, '# channels not specified'
++                #raise Error, '# channels not specified'
++		pass
+             if not self._sampwidth:
+-                raise Error, 'sample width not specified'
++                #raise Error, 'sample width not specified'
++		pass
+             if not self._framerate:
+-                raise Error, 'sampling rate not specified'
++                #raise Error, 'sampling rate not specified'
++		pass
+             self._write_header(datasize)
+ 
+     def _init_compression(self):

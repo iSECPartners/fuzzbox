@@ -1,0 +1,6 @@
+- Should probably fuzz the filename too - good opportunity for 
+	turning up bugs in shells/file browsers as well as players. 
+
+- Option to use WinDbg as a default exception handler.
+
+- Use a seed for random functions to reproduce fuzzer runs
